@@ -1378,6 +1378,7 @@ conn_tx_pdu:
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
     uint32_t tx_timestamp = os_cputime_get32();
+    printf("[RX] %lu", tx_timestamp);
     #ifdef BLE_LL_ENCRYPT_DEBUG
     console_printf("[RX] %lu", tx_timestamp);
     #endif
