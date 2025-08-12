@@ -28,6 +28,7 @@
 #include "controller/ble_ll_sched.h"
 #include "controller/ble_ll_ctrl.h"
 #include "controller/ble_phy.h"
+#include "log/log.h"
 
 #ifdef __cplusplus
 extern "C" {

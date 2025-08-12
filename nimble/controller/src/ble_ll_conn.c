@@ -43,6 +43,7 @@
 #include "controller/ble_ll_utils.h"
 #include "ble_ll_conn_priv.h"
 #include "ble_ll_ctrl_priv.h"
+#include "log/log.h"
 
 #if (BLETEST_THROUGHPUT_TEST == 1)
 extern void bletest_completed_pkt(uint16_t handle);
@@ -1370,7 +1371,6 @@ conn_tx_pdu:
     }
 #endif
 
-    os_cputime_get32();
 
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
