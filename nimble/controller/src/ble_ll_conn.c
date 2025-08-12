@@ -1400,7 +1400,7 @@ conn_tx_pdu:
     }
 
     uint32_t tx_timestamp = os_cputime_get32();
-    LOG_INFO("[TX] %ul", tx_timestamp);
+    log_dummy("[TX] %ul", tx_timestamp);
 
     return rc;
 }
