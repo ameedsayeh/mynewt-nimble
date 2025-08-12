@@ -52,11 +52,6 @@ extern void bletest_completed_pkt(uint16_t handle);
 struct ble_ll_conn_sm *g_ble_ll_conn_css_ref;
 #endif
 
-
-#ifdef BLE_LL_ENCRYPT_DEBUG
-#include "console/console.h"
-#endif
-
 /* XXX TODO
  * 1) I think if we are initiating and we already have a connection with
  * a device that we will still try and connect to it. Fix this.
@@ -1379,10 +1374,6 @@ conn_tx_pdu:
     ble_phy_set_txend_cb(txend_func, connsm);
     uint32_t tx_timestamp = os_cputime_get32();
     printf("[RX] %lu", tx_timestamp);
-    #ifdef BLE_LL_ENCRYPT_DEBUG
-    console_printf("[RX] %lu", tx_timestamp);
-    #endif
-    puts("[RX]");
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
     if (!rc) {
         /* Log transmit on connection state */

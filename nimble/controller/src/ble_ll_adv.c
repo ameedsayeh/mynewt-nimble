@@ -1155,8 +1155,8 @@ ble_ll_adv_tx_start_cb(struct ble_ll_sched_item *sch)
         ble_phy_set_txend_cb(ble_ll_adv_tx_done, advsm);
     }
 
-    uint32_t tx_timestamp = os_cputime_get32();
-    printf("[RX] %lu", tx_timestamp);
+    // uint32_t tx_timestamp = os_cputime_get32();
+    // printf("[RX] %lu", tx_timestamp);
 
     /* Transmit advertisement */
 #if MYNEWT_VAL(BLE_LL_CFG_FEAT_LL_EXT_ADV)
