@@ -1374,8 +1374,8 @@ conn_tx_pdu:
     ble_phy_set_txend_cb(txend_func, connsm);
     uint32_t tx_timestamp = os_cputime_get32();
     console_printf("[RX] %lu", tx_timestamp);
-    puts("[RX]");
     MODLOG_DFLT(INFO, "[RX] %lu", tx_timestamp);
+    puts("[RX]");
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
     if (!rc) {
         /* Log transmit on connection state */
