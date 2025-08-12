@@ -1370,10 +1370,11 @@ conn_tx_pdu:
     }
 #endif
 
+    printf("[RX]");
+
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
-    uint32_t tx_timestamp = os_cputime_get32();
-    printf("[RX] %lu", tx_timestamp);
+    // uint32_t tx_timestamp = os_cputime_get32();
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
     if (!rc) {
         /* Log transmit on connection state */
