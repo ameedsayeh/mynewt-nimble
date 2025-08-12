@@ -43,7 +43,6 @@
 #include "controller/ble_ll_utils.h"
 #include "ble_ll_conn_priv.h"
 #include "ble_ll_ctrl_priv.h"
-#include "console.h"
 
 #if (BLETEST_THROUGHPUT_TEST == 1)
 extern void bletest_completed_pkt(uint16_t handle);
@@ -51,6 +50,11 @@ extern void bletest_completed_pkt(uint16_t handle);
 
 #if MYNEWT_VAL(BLE_LL_CONN_STRICT_SCHED)
 struct ble_ll_conn_sm *g_ble_ll_conn_css_ref;
+#endif
+
+
+#ifdef BLE_LL_ENCRYPT_DEBUG
+#include "console/console.h"
 #endif
 
 /* XXX TODO
