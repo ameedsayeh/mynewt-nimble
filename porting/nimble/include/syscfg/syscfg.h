@@ -337,7 +337,7 @@
 
 /*** @apache-mynewt-core/sys/log/common */
 #ifndef MYNEWT_VAL_DFLT_LOG_LVL
-#define MYNEWT_VAL_DFLT_LOG_LVL (1)
+#define MYNEWT_VAL_DFLT_LOG_LVL (4)
 #endif
 
 #ifndef MYNEWT_VAL_DFLT_LOG_MOD
