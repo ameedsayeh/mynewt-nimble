@@ -1370,7 +1370,7 @@ conn_tx_pdu:
     }
 #endif
 
-    printf("[RX]");
+    // printf("[RX]");
 
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
