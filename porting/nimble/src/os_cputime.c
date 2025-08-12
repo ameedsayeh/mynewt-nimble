@@ -120,9 +120,6 @@ uint32_t
 os_cputime_get32(void)
 {
     uint32_t cpu_time;
-
-    printf("Falafel");
-
     cpu_time = hal_timer_read(MYNEWT_VAL(OS_CPUTIME_TIMER_NUM));
     return cpu_time;
 }
