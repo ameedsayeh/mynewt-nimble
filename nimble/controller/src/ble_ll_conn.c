@@ -43,6 +43,7 @@
 #include "controller/ble_ll_utils.h"
 #include "ble_ll_conn_priv.h"
 #include "ble_ll_ctrl_priv.h"
+#include "console.h"
 
 #if (BLETEST_THROUGHPUT_TEST == 1)
 extern void bletest_completed_pkt(uint16_t handle);
@@ -1374,7 +1375,6 @@ conn_tx_pdu:
     ble_phy_set_txend_cb(txend_func, connsm);
     uint32_t tx_timestamp = os_cputime_get32();
     console_printf("[RX] %lu", tx_timestamp);
-    MODLOG_DFLT(INFO, "[RX] %lu", tx_timestamp);
     puts("[RX]");
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
     if (!rc) {
