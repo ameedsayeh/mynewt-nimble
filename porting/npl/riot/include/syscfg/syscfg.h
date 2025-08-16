@@ -553,7 +553,7 @@
 #endif
 
 #ifndef MYNEWT_VAL_OS_DEBUG_MODE
-#define MYNEWT_VAL_OS_DEBUG_MODE (0)
+#define MYNEWT_VAL_OS_DEBUG_MODE (1)
 #endif
 
 #ifndef MYNEWT_VAL_OS_EVENTQ_DEBUG
@@ -642,7 +642,7 @@
 #endif
 
 #ifndef MYNEWT_VAL_OS_TIME_DEBUG
-#define MYNEWT_VAL_OS_TIME_DEBUG (0)
+#define MYNEWT_VAL_OS_TIME_DEBUG (1)
 #endif
 
 #ifndef MYNEWT_VAL_OS_WATCHDOG_MONITOR
@@ -698,7 +698,7 @@
 
 /*** @apache-mynewt-core/sys/log/common */
 #ifndef MYNEWT_VAL_DFLT_LOG_LVL
-#define MYNEWT_VAL_DFLT_LOG_LVL (1)
+#define MYNEWT_VAL_DFLT_LOG_LVL (5)
 #endif
 
 #ifndef MYNEWT_VAL_DFLT_LOG_MOD
@@ -715,7 +715,7 @@
 #endif
 
 #ifndef MYNEWT_VAL_MODLOG_LOG_MACROS
-#define MYNEWT_VAL_MODLOG_LOG_MACROS (0)
+#define MYNEWT_VAL_MODLOG_LOG_MACROS (1)
 #endif
 
 #ifndef MYNEWT_VAL_MODLOG_MAX_MAPPINGS
