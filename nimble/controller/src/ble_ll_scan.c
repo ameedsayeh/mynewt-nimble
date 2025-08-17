@@ -41,7 +41,6 @@
 #include "controller/ble_ll_trace.h"
 #include "controller/ble_ll_sync.h"
 #include "ble_ll_conn_priv.h"
-#include "console/console.h"
 
 
 #if MYNEWT_VAL(BLE_LL_ROLE_OBSERVER)
@@ -751,7 +750,7 @@ ble_ll_scan_start(struct ble_ll_scan_sm *scansm)
     int phy;
 #endif
 
-    console_printf("Starting BLE scan...\n");
+    puts("Starting BLE scan...\n");
 
     BLE_LL_ASSERT(scansm->scan_rsp_pending == 0);
 
