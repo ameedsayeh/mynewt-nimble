@@ -1372,6 +1372,8 @@ conn_tx_pdu:
     }
 #endif
 
+    printf("Time: %lu\n", ble_ll_tmr_get());
+
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
