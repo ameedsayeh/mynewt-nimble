@@ -1401,7 +1401,7 @@ conn_tx_pdu:
         }
     }
 
-    printf("Time: %lu\n", fme_time);
+    printf("Time Check");
 
     return rc;
 }
