@@ -1372,7 +1372,7 @@ conn_tx_pdu:
     }
 #endif
 
-    ble_ll_tmr_get();
+    uint32_t fme_time = ble_ll_tmr_get();
 
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
@@ -1400,6 +1400,9 @@ conn_tx_pdu:
             STATS_INCN(ble_ll_conn_stats, tx_l2cap_bytes, cur_txlen);
         }
     }
+
+    printf("Time: %lu\n", fme_time);
+
     return rc;
 }
 
