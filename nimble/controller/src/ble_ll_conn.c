@@ -1074,6 +1074,7 @@ puts("ble_ll_conn_tx_pdu");
     cur_offset = 0;
     if (!connsm->cur_tx_pdu && !CONN_F_EMPTY_PDU_TXD(connsm)) {
         /* Convert packet header to mbuf */
+        puts("HERE 1");
         m = OS_MBUF_PKTHDR_TO_MBUF(pkthdr);
         nextpkthdr = STAILQ_NEXT(pkthdr, omp_next);
 
@@ -1107,6 +1108,7 @@ puts("ble_ll_conn_tx_pdu");
             }
         }
 #endif
+        puts("HERE 2");
         /* Take packet off queue*/
         STAILQ_REMOVE_HEAD(&connsm->conn_txq, omp_next);
         ble_hdr = BLE_MBUF_HDR_PTR(m);
@@ -1134,8 +1136,10 @@ puts("ble_ll_conn_tx_pdu");
         hdr_byte = ble_hdr->txinfo.hdr_byte;
         connsm->cur_tx_pdu = m;
     } else {
+        puts("HERE 3");
         nextpkthdr = pkthdr;
         if (connsm->cur_tx_pdu) {
+            puts("HERE 4");
             m = connsm->cur_tx_pdu;
             ble_hdr = BLE_MBUF_HDR_PTR(m);
             pktlen = OS_MBUF_PKTLEN(m);
@@ -1213,7 +1217,7 @@ puts("ble_ll_conn_tx_pdu");
 #else
         tx_phy_mode = BLE_PHY_MODE_1M;
 #endif
-
+        puts("HERE 5");
         ticks = (BLE_LL_IFS * 3) + connsm->eff_max_rx_time +
             ble_ll_pdu_tx_time_get(next_txlen, tx_phy_mode) +
             ble_ll_pdu_tx_time_get(cur_txlen, tx_phy_mode);
@@ -1225,6 +1229,7 @@ puts("ble_ll_conn_tx_pdu");
 #endif
 
         ticks = ble_ll_tmr_u2t(ticks);
+        puts("HERE 6");
         if (LL_TMR_LT(ble_ll_tmr_get() + ticks, next_event_time)) {
             md = 1;
         }
@@ -1237,6 +1242,7 @@ conn_tx_pdu:
          * This looks strange, but we dont use the data pointer in the mbuf
          * when we have an empty pdu.
          */
+        puts("HERE 7");
         m = (struct os_mbuf *)&empty_pdu;
         m->om_data = (uint8_t *)&empty_pdu;
         m->om_data += BLE_MBUF_MEMBLOCK_OVERHEAD;
@@ -1372,8 +1378,6 @@ conn_tx_pdu:
     }
 #endif
 
-    // uint32_t fme_time = ble_ll_tmr_get();
-
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
@@ -1400,8 +1404,6 @@ conn_tx_pdu:
             STATS_INCN(ble_ll_conn_stats, tx_l2cap_bytes, cur_txlen);
         }
     }
-
-    printf("Time Check");
 
     return rc;
 }
