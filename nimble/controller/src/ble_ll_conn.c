@@ -1041,6 +1041,8 @@ ble_ll_conn_tx_pdu(struct ble_ll_conn_sm *connsm)
     uint8_t opcode;
 #endif
 
+puts("ble_ll_conn_tx_pdu");
+
     /* For compiler warnings... */
     ble_hdr = NULL;
     m = NULL;
@@ -1417,6 +1419,9 @@ ble_ll_conn_event_start_cb(struct ble_ll_sched_item *sch)
 #endif
     uint32_t start;
     struct ble_ll_conn_sm *connsm;
+
+    puts("ble_ll_conn_event_start_cb");
+    printf("BLE %d", 3);
 
     /* XXX: note that we can extend end time here if we want. Look at this */
 
