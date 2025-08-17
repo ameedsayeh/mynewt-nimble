@@ -1372,7 +1372,7 @@ conn_tx_pdu:
     }
 #endif
 
-    uint32_t fme_time = ble_ll_tmr_get();
+    // uint32_t fme_time = ble_ll_tmr_get();
 
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
