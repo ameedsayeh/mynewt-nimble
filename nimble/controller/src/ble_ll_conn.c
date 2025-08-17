@@ -3098,6 +3098,8 @@ static void
 ble_ll_conn_central_start(uint8_t phy, uint8_t csa,
                           struct ble_ll_scan_addr_data *addrd, uint8_t *targeta)
 {
+
+    puts("Central start");
     struct ble_ll_conn_sm *connsm;
 
     connsm = g_ble_ll_conn_create_sm.connsm;
@@ -3925,6 +3927,8 @@ ble_ll_conn_periph_start(uint8_t *rxbuf, uint8_t pat, struct ble_mbuf_hdr *rxhdr
     uint8_t *inita;
     uint8_t *dptr;
     struct ble_ll_conn_sm *connsm;
+
+    puts("Periph start");
 
     /* Ignore the connection request if we are already connected*/
     inita = rxbuf + BLE_LL_PDU_HDR_LEN;
