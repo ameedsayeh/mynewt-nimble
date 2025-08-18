@@ -1244,7 +1244,7 @@ conn_tx_pdu:
         ble_hdr->txinfo.offset = 0;
         ble_hdr->txinfo.pyld_len = 0;
         uint32_t tx_timestamp = ble_ll_tmr_get();
-        printf("Setting tx_timestamp %d", (int)tx_timestamp);
+        printf("Setting tx_timestamp %u", tx_timestamp);
         ble_hdr->txinfo.tx_timestamp = tx_timestamp;
     }
 
