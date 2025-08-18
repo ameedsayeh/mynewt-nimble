@@ -1041,7 +1041,7 @@ ble_ll_conn_tx_pdu(struct ble_ll_conn_sm *connsm)
     uint8_t opcode;
 #endif
 
-puts("ble_ll_conn_tx_pdu");
+// puts("ble_ll_conn_tx_pdu");
 
     /* For compiler warnings... */
     ble_hdr = NULL;
@@ -1420,8 +1420,7 @@ ble_ll_conn_event_start_cb(struct ble_ll_sched_item *sch)
     uint32_t start;
     struct ble_ll_conn_sm *connsm;
 
-    puts("ble_ll_conn_event_start_cb");
-    printf("BLE %d", 3);
+    // puts("ble_ll_conn_event_start_cb");
 
     /* XXX: note that we can extend end time here if we want. Look at this */
 
@@ -3269,7 +3268,7 @@ void
 ble_ll_conn_rx_data_pdu(struct os_mbuf *rxpdu, struct ble_mbuf_hdr *hdr)
 {
 
-    puts("ble_ll_conn_rx_data_pdu");
+    // puts("ble_ll_conn_rx_data_pdu");
     uint8_t hdr_byte;
     uint8_t rxd_sn;
     uint8_t *rxbuf;

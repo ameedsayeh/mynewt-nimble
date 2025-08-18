@@ -750,7 +750,7 @@ ble_ll_scan_start(struct ble_ll_scan_sm *scansm)
     int phy;
 #endif
 
-    puts("Starting BLE scan...\n");
+    // puts("Starting BLE scan...\n");
 
     BLE_LL_ASSERT(scansm->scan_rsp_pending == 0);
 
