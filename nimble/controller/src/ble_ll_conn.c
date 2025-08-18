@@ -1074,7 +1074,6 @@ puts("ble_ll_conn_tx_pdu");
     cur_offset = 0;
     if (!connsm->cur_tx_pdu && !CONN_F_EMPTY_PDU_TXD(connsm)) {
         /* Convert packet header to mbuf */
-        puts("HERE 1");
         m = OS_MBUF_PKTHDR_TO_MBUF(pkthdr);
         nextpkthdr = STAILQ_NEXT(pkthdr, omp_next);
 
@@ -1108,7 +1107,6 @@ puts("ble_ll_conn_tx_pdu");
             }
         }
 #endif
-        puts("HERE 2");
         /* Take packet off queue*/
         STAILQ_REMOVE_HEAD(&connsm->conn_txq, omp_next);
         ble_hdr = BLE_MBUF_HDR_PTR(m);
@@ -1136,10 +1134,8 @@ puts("ble_ll_conn_tx_pdu");
         hdr_byte = ble_hdr->txinfo.hdr_byte;
         connsm->cur_tx_pdu = m;
     } else {
-        puts("HERE 3");
         nextpkthdr = pkthdr;
         if (connsm->cur_tx_pdu) {
-            puts("HERE 4");
             m = connsm->cur_tx_pdu;
             ble_hdr = BLE_MBUF_HDR_PTR(m);
             pktlen = OS_MBUF_PKTLEN(m);
@@ -1217,7 +1213,6 @@ puts("ble_ll_conn_tx_pdu");
 #else
         tx_phy_mode = BLE_PHY_MODE_1M;
 #endif
-        puts("HERE 5");
         ticks = (BLE_LL_IFS * 3) + connsm->eff_max_rx_time +
             ble_ll_pdu_tx_time_get(next_txlen, tx_phy_mode) +
             ble_ll_pdu_tx_time_get(cur_txlen, tx_phy_mode);
@@ -1229,7 +1224,6 @@ puts("ble_ll_conn_tx_pdu");
 #endif
 
         ticks = ble_ll_tmr_u2t(ticks);
-        puts("HERE 6");
         if (LL_TMR_LT(ble_ll_tmr_get() + ticks, next_event_time)) {
             md = 1;
         }
@@ -1242,7 +1236,6 @@ conn_tx_pdu:
          * This looks strange, but we dont use the data pointer in the mbuf
          * when we have an empty pdu.
          */
-        puts("HERE 7");
         m = (struct os_mbuf *)&empty_pdu;
         m->om_data = (uint8_t *)&empty_pdu;
         m->om_data += BLE_MBUF_MEMBLOCK_OVERHEAD;
@@ -1250,6 +1243,8 @@ conn_tx_pdu:
         ble_hdr->txinfo.flags = 0;
         ble_hdr->txinfo.offset = 0;
         ble_hdr->txinfo.pyld_len = 0;
+        puts("Setting tx_timestamp");
+        ble_hdr->txinfo.tx_timestamp = ble_ll_tmr_get();
     }
 
     /* Set tx seqnum */
@@ -1269,7 +1264,6 @@ conn_tx_pdu:
 
     /* Set the header byte in the outgoing frame */
     ble_hdr->txinfo.hdr_byte = hdr_byte;
-
     /*
      * If we are a peripheral, check to see if this transmission will end the
      * connection event. We will end the connection event if we have
@@ -3111,7 +3105,6 @@ ble_ll_conn_central_start(uint8_t phy, uint8_t csa,
                           struct ble_ll_scan_addr_data *addrd, uint8_t *targeta)
 {
 
-    puts("Central start");
     struct ble_ll_conn_sm *connsm;
 
     connsm = g_ble_ll_conn_create_sm.connsm;
@@ -3276,6 +3269,8 @@ ble_ll_conn_rx_isr_start(struct ble_mbuf_hdr *rxhdr, uint32_t aa)
 void
 ble_ll_conn_rx_data_pdu(struct os_mbuf *rxpdu, struct ble_mbuf_hdr *hdr)
 {
+
+    puts("ble_ll_conn_rx_data_pdu");
     uint8_t hdr_byte;
     uint8_t rxd_sn;
     uint8_t *rxbuf;
@@ -3939,8 +3934,6 @@ ble_ll_conn_periph_start(uint8_t *rxbuf, uint8_t pat, struct ble_mbuf_hdr *rxhdr
     uint8_t *inita;
     uint8_t *dptr;
     struct ble_ll_conn_sm *connsm;
-
-    puts("Periph start");
 
     /* Ignore the connection request if we are already connected*/
     inita = rxbuf + BLE_LL_PDU_HDR_LEN;

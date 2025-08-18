@@ -73,6 +73,7 @@ struct ble_mbuf_hdr_rxinfo
     /* XXX: we could just use single phy_mode field */
     int8_t  phy;
     uint8_t phy_mode;
+    uint32_t rx_timestamp;
 #if MYNEWT_VAL(BLE_LL_CFG_FEAT_LL_PRIVACY)
     int8_t  rpa_index;
 #endif
@@ -116,6 +117,7 @@ struct ble_mbuf_hdr_txinfo
     uint8_t hdr_byte;
     uint16_t offset;
     uint16_t pyld_len;
+    uint32_t tx_timestamp;
 };
 
 struct ble_mbuf_hdr
