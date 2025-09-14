@@ -1155,12 +1155,15 @@ ble_ll_adv_tx_start_cb(struct ble_ll_sched_item *sch)
         ble_phy_set_txend_cb(ble_ll_adv_tx_done, advsm);
     }
 
+    printf("Before transmit");
     /* Transmit advertisement */
 #if MYNEWT_VAL(BLE_LL_CFG_FEAT_LL_EXT_ADV)
     rc = ble_phy_tx(ble_ll_adv_pdu_make, advsm, end_trans);
 #else
     rc = ble_phy_tx(ble_ll_adv_legacy_pdu_make, advsm, end_trans);
 #endif
+
+printf("After transmit");
     if (rc) {
         goto adv_tx_done;
     }
@@ -2736,7 +2739,6 @@ ble_ll_adv_sm_start(struct ble_ll_adv_sm *advsm)
     start_delay_us = ble_ll_rand() % (BLE_LL_ADV_DELAY_MS_MAX * 1000);
     advsm->adv_pdu_start_time = ble_ll_tmr_get() +
                                 ble_ll_tmr_u2t(start_delay_us);
-
     ble_ll_adv_set_sched(advsm);
 
     delta = (int32_t)(advsm->adv_sch.start_time - earliest_start_time);
