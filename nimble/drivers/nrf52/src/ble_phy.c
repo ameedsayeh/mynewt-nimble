@@ -1927,7 +1927,10 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     state = NRF_RADIO->STATE;
 
     now = os_cputime_get32();
-
+    #if defined(NRF_POWER)
+printf("Defined NRF_POWER\n");
+    NRF_POWER->GPREGRET2 = now;
+#endif
     if (state != RADIO_STATE_STATE_Tx) {
         /* Set phy state to transmitting and count packet statistics */
         g_ble_phy_data.phy_state = BLE_PHY_STATE_TX;
