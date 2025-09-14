@@ -1928,8 +1928,8 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
 
     now = os_cputime_get32();
 
-    printf("ble_phy_tx: phy 0x%08lx\n", g_ble_phy_data.phy_start_cputime);
-    printf("ble_phy_tx: now 0x%08lx\n", now);
+    // printf("ble_phy_tx: phy 0x%08lx\n", g_ble_phy_data.phy_start_cputime);
+    // printf("ble_phy_tx: now 0x%08lx\n", now);
 
     if (state != RADIO_STATE_STATE_Tx) {
         /* Set phy state to transmitting and count packet statistics */
