@@ -1155,6 +1155,19 @@ ble_ll_adv_tx_start_cb(struct ble_ll_sched_item *sch)
         ble_phy_set_txend_cb(ble_ll_adv_tx_done, advsm);
     }
 
+    /* Optionally notify host via vendor-specific HCI event about PHY TX start */
+    {
+        struct ble_hci_ev_vendor_adv_phy_start *ev;
+        ev = ble_transport_alloc_evt(0);
+        if (ev) {
+            ev->opcode = BLE_HCI_EVENT_VENDOR_ADV_PHY_START;
+            ev->length = sizeof(ev->timestamp);
+            ev->timestamp = os_cputime_get32();
+            /* ignore return; if transport is full, just drop */
+            (void)ble_transport_to_hs_evt(ev);
+        }
+    }
+
     /* Transmit advertisement */
 #if MYNEWT_VAL(BLE_LL_CFG_FEAT_LL_EXT_ADV)
     rc = ble_phy_tx(ble_ll_adv_pdu_make, advsm, end_trans);
