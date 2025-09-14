@@ -1943,7 +1943,7 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     // printf("Current time: %lu us\n", time);
 
     // printf("ble_phy_tx: phy 0x%08lx\n", g_ble_phy_data.phy_start_cputime);
-    printf("ble_phy_tx: now 0x%lu\n", now);
+    // printf("ble_phy_tx: now 0x%lu\n", now);
 
     return rc;
 }
