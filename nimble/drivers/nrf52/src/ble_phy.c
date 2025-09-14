@@ -1924,6 +1924,9 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
 
     /* If we already started transmitting, abort it! */
     state = NRF_RADIO->STATE;
+
+    printf("ble_phy_tx: In\n");
+
     if (state != RADIO_STATE_STATE_Tx) {
         /* Set phy state to transmitting and count packet statistics */
         g_ble_phy_data.phy_state = BLE_PHY_STATE_TX;

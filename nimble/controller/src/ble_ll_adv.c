@@ -1155,7 +1155,8 @@ ble_ll_adv_tx_start_cb(struct ble_ll_sched_item *sch)
         ble_phy_set_txend_cb(ble_ll_adv_tx_done, advsm);
     }
 
-    printf("Before transmit");
+    printf("Before ble_phy_tx: Before\n");
+
     /* Transmit advertisement */
 #if MYNEWT_VAL(BLE_LL_CFG_FEAT_LL_EXT_ADV)
     rc = ble_phy_tx(ble_ll_adv_pdu_make, advsm, end_trans);
@@ -1163,7 +1164,8 @@ ble_ll_adv_tx_start_cb(struct ble_ll_sched_item *sch)
     rc = ble_phy_tx(ble_ll_adv_legacy_pdu_make, advsm, end_trans);
 #endif
 
-printf("After transmit");
+    printf("Before ble_phy_tx: After\n");
+
     if (rc) {
         goto adv_tx_done;
     }
