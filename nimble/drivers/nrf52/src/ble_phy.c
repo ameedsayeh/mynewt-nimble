@@ -1843,6 +1843,7 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     uint8_t hdr_byte;
     uint32_t state;
     uint32_t shortcuts;
+    uint32_t now;
 
     if (g_ble_phy_data.phy_transition_late) {
         ble_phy_disable();
@@ -1925,7 +1926,10 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     /* If we already started transmitting, abort it! */
     state = NRF_RADIO->STATE;
 
-    printf("ble_phy_tx: In\n");
+    now = os_cputime_get32();
+
+    printf("ble_phy_tx: phy 0x%08x\n", g_ble_phy_data.phy_start_cputime);
+    printf("ble_phy_tx: now 0x%08x\n", now);
 
     if (state != RADIO_STATE_STATE_Tx) {
         /* Set phy state to transmitting and count packet statistics */
