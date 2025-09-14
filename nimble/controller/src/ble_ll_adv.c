@@ -2777,6 +2777,7 @@ ble_ll_adv_read_txpwr(uint8_t *rspbuf, uint8_t *rsplen)
 {
     struct ble_hci_le_rd_adv_chan_txpwr_rp *rsp = (void *) rspbuf;
 
+    printf("ble_ll_adv_read_txpwr\n");
     rsp->power_level = g_ble_ll_tx_power;
 
     *rsplen = sizeof(*rsp);
