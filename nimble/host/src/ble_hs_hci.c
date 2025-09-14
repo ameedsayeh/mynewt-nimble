@@ -24,6 +24,10 @@
 #include "mem/mem.h"
 #include "ble_hs_priv.h"
 
+#include "nimble/hci_common.h"
+
+__attribute__((weak)) void ble_hs_on_adv_phy_start(uint32_t timestamp) {}
+
 #define BLE_HCI_CMD_TIMEOUT_MS  2000
 
 static struct ble_npl_mutex ble_hs_hci_mutex;
@@ -375,6 +379,16 @@ ble_hs_hci_rx_evt(uint8_t *hci_ev, void *arg)
     int enqueue;
 
     BLE_HS_DBG_ASSERT(hci_ev != NULL);
+
+    if (ev->opcode == BLE_HCI_EVENT_VENDOR_ADV_PHY_START) {
+        printf("HERE!");
+        if (ev->length >= sizeof(uint32_t)) {
+            struct ble_hci_ev_vendor_adv_phy_start *vs_ev = (void *)ev;
+            ble_hs_on_adv_phy_start(vs_ev->timestamp);
+        }
+        ble_transport_free(ev);
+        return 0;
+    }
 
     switch (ev->opcode) {
     case BLE_HCI_EVCODE_COMMAND_COMPLETE:
