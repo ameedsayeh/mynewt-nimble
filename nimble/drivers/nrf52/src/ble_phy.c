@@ -1928,7 +1928,6 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
 
     now = os_cputime_get32();
     #if defined(NRF_POWER)
-printf("Defined NRF_POWER\n");
     NRF_POWER->GPREGRET2 = now;
 #endif
     if (state != RADIO_STATE_STATE_Tx) {
