@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "os_cputime.h": "c"
+        "os_cputime.h": "c",
+        "ble_hs_mbuf_priv.h": "c",
+        "ble_hs_atomic_priv.h": "c"
     }
 }
