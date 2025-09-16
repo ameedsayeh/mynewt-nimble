@@ -57,6 +57,10 @@
 extern void tm_tick(void);
 #endif
 
+// Weak functions to be overridden in the application
+__attribute__((weak)) void ble_tx_ts(uint32_t timestamp) {}
+__attribute__((weak)) void ble_rx_ts(uint32_t timestamp) {}
+
 /*
  * NOTE: This code uses a couple of PPI channels so care should be taken when
  *       using PPI somewhere else.
@@ -1197,7 +1201,8 @@ static bool
 ble_phy_rx_start_isr(void)
 {
     // RX TIMESTAMP HERE
-    printf("ble_phy_rx_start_isr\n");
+    // printf("ble_phy_rx_start_isr\n");
+    ble_rx_ts(os_cputime_get32());
 
     int rc;
     uint32_t state;
@@ -1921,7 +1926,8 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     nrf_radio_int_enable(NRF_RADIO, RADIO_INTENSET_DISABLED_Msk);
 
     // TX TIMESTAMP HERE
-    printf("ble_phy_tx\n");
+    // printf("ble_phy_tx\n");
+    ble_tx_ts(os_cputime_get32());
 
     /* Set the PHY transition */
     g_ble_phy_data.phy_transition = end_trans;

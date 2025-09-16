@@ -26,11 +26,6 @@
 
 #include "nimble/hci_common.h"
 
-// Weak functions to be overridden in the application
-// __attribute__((weak)) void ble_adv_phy_start(uint32_t timestamp) {}
-// __attribute__((weak)) void ble_tx_phy_start(uint32_t timestamp) {}
-// __attribute__((weak)) void ble_rx_phy_end(uint32_t timestamp) {}
-
 #define BLE_HCI_CMD_TIMEOUT_MS  2000
 
 static struct ble_npl_mutex ble_hs_hci_mutex;
