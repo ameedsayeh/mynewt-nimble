@@ -1196,6 +1196,9 @@ ble_phy_rx_end_isr(void)
 static bool
 ble_phy_rx_start_isr(void)
 {
+    // RX TIMESTAMP HERE
+    printf("ble_phy_rx_start_isr\n");
+
     int rc;
     uint32_t state;
     uint32_t usecs;
@@ -1917,6 +1920,9 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     NRF_RADIO->SHORTS = shortcuts;
     nrf_radio_int_enable(NRF_RADIO, RADIO_INTENSET_DISABLED_Msk);
 
+    // TX TIMESTAMP HERE
+    printf("ble_phy_tx\n");
+
     /* Set the PHY transition */
     g_ble_phy_data.phy_transition = end_trans;
 
@@ -1926,10 +1932,6 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     /* If we already started transmitting, abort it! */
     state = NRF_RADIO->STATE;
 
-    now = os_cputime_get32();
-    #if defined(NRF_POWER)
-    NRF_POWER->GPREGRET2 = now;
-#endif
     if (state != RADIO_STATE_STATE_Tx) {
         /* Set phy state to transmitting and count packet statistics */
         g_ble_phy_data.phy_state = BLE_PHY_STATE_TX;
@@ -1943,7 +1945,6 @@ ble_phy_tx(ble_phy_tx_pducb_t pducb, void *pducb_arg, uint8_t end_trans)
     }
 
     // printf("Current time: %lu us\n", time);
-
     // printf("ble_phy_tx: phy 0x%08lx\n", g_ble_phy_data.phy_start_cputime);
     // printf("ble_phy_tx: now 0x%lu\n", now);
 

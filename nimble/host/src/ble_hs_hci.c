@@ -26,7 +26,10 @@
 
 #include "nimble/hci_common.h"
 
-__attribute__((weak)) void ble_hs_on_adv_phy_start(uint32_t timestamp) {}
+// Weak functions to be overridden in the application
+// __attribute__((weak)) void ble_adv_phy_start(uint32_t timestamp) {}
+// __attribute__((weak)) void ble_tx_phy_start(uint32_t timestamp) {}
+// __attribute__((weak)) void ble_rx_phy_end(uint32_t timestamp) {}
 
 #define BLE_HCI_CMD_TIMEOUT_MS  2000
 
@@ -380,15 +383,6 @@ ble_hs_hci_rx_evt(uint8_t *hci_ev, void *arg)
 
     BLE_HS_DBG_ASSERT(hci_ev != NULL);
 
-    if (ev->opcode == BLE_HCI_EVENT_VENDOR_ADV_PHY_START) {
-        if (ev->length >= sizeof(uint32_t)) {
-            struct ble_hci_ev_vendor_adv_phy_start *vs_ev = (void *)ev;
-            ble_hs_on_adv_phy_start(vs_ev->timestamp);
-        }
-        ble_transport_free(ev);
-        return 0;
-    }
-
     switch (ev->opcode) {
     case BLE_HCI_EVCODE_COMMAND_COMPLETE:
         enqueue = (cmd_complete->opcode == BLE_HCI_OPCODE_NOP);
@@ -396,6 +390,21 @@ ble_hs_hci_rx_evt(uint8_t *hci_ev, void *arg)
     case BLE_HCI_EVCODE_COMMAND_STATUS:
         enqueue = (cmd_status->opcode == BLE_HCI_OPCODE_NOP);
         break;
+    // case BLE_ADV_PHY_START:
+    //     struct ble_adv_phy_start *adv_start_ev = (void *)ev;
+    //     ble_adv_phy_start(adv_start_ev->timestamp);
+    //     ble_transport_free(ev);
+    //     return 0;
+    // case BLE_TX_PHY_START:
+    //     struct ble_tx_phy_start *tx_start_ev = (void *)ev;
+    //     ble_tx_phy_start(tx_start_ev->timestamp);
+    //     ble_transport_free(ev);
+    //     return 0;
+    // case BLE_RX_PHY_END:
+    //     struct ble_rx_phy_end *rx_end_ev = (void *)ev;
+    //     ble_rx_phy_end(rx_end_ev->timestamp);
+    //     ble_transport_free(ev);
+    //     return 0;
     default:
         enqueue = 1;
         break;

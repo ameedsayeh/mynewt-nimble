@@ -2004,13 +2004,27 @@ struct hci_data_hdr
 #define BLE_HCI_PB_FIRST_FLUSH              2
 #define BLE_HCI_PB_FULL                     3
 
-/* Vendor-specific event: Advertising PHY start timestamp */
-#define BLE_HCI_EVENT_VENDOR_ADV_PHY_START   0xFF  /* Example: 0xFF, can be any unused code */
-struct ble_hci_ev_vendor_adv_phy_start {
-    uint8_t opcode;      /* = BLE_HCI_EVENT_VENDOR_ADV_PHY_START */
-    uint8_t length;      /* = sizeof(timestamp) */
-    uint32_t timestamp;  /* os_cputime_get32() value at PHY start */
-} __attribute__((packed));
+
+// #define BLE_ADV_PHY_START   0xB0
+// struct ble_adv_phy_start {
+//     uint8_t opcode;
+//     uint8_t length;
+//     uint32_t timestamp;
+// } __attribute__((packed));
+
+// #define BLE_TX_PHY_START   0xB1
+// struct ble_tx_phy_start {
+//     uint8_t opcode;
+//     uint8_t length;
+//     uint32_t timestamp;
+// } __attribute__((packed));
+
+// #define BLE_RX_PHY_END   0xB2
+// struct ble_rx_phy_end {
+//     uint8_t opcode;
+//     uint8_t length;
+//     uint32_t timestamp;
+// } __attribute__((packed));
 
 #ifdef __cplusplus
 }
