@@ -2013,6 +2013,7 @@ ble_transport_to_ll_cmd_impl(void *buf)
 int
 ble_transport_to_ll_acl_impl(struct os_mbuf *om)
 {
+    printf("HERE\n");
     return ble_ll_hci_acl_rx(om, NULL);
 }
 
