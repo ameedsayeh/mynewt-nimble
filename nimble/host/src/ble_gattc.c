@@ -95,7 +95,7 @@
 #define BLE_GATTC_PROC_F_STALLED                0x01
 
 
-__attribute__((weak)) void ble_notify_tx(uint32_t timestamp) {}
+// __attribute__((weak)) void ble_notify_tx(uint32_t timestamp) {}
 
 /** Represents an in-progress GATT procedure. */
 struct ble_gattc_proc {

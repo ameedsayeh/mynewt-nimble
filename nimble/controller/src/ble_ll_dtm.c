@@ -256,6 +256,7 @@ ble_ll_dtm_tx_sched_cb(struct ble_ll_sched_item *sch)
     if (rc) {
         goto resched;
     }
+    printf("ble_ll_dtm_tx_sched_cb\n");
 
     ble_ll_state_set(BLE_LL_STATE_DTM);
 

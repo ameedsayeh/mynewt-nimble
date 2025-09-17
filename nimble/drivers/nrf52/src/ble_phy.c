@@ -59,7 +59,7 @@ extern void tm_tick(void);
 
 // Weak functions to be overridden in the application
 __attribute__((weak)) void ble_tx_phy_ts(uint32_t timestamp) {}
-__attribute__((weak)) void ble_rx_phy_ts(uint32_t timestamp) {}
+// __attribute__((weak)) void ble_rx_phy_ts(uint32_t timestamp) {}
 
 /*
  * NOTE: This code uses a couple of PPI channels so care should be taken when
@@ -1201,7 +1201,7 @@ static bool
 ble_phy_rx_start_isr(void)
 {
     // RX TIMESTAMP HERE
-    ble_rx_phy_ts(os_cputime_get32());
+    // ble_rx_phy_ts(os_cputime_get32());
 
     int rc;
     uint32_t state;
