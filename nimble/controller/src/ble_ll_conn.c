@@ -44,6 +44,8 @@
 #include "ble_ll_conn_priv.h"
 #include "ble_ll_ctrl_priv.h"
 
+__attribute__((weak)) void ble_ll_conn_tx(uint32_t timestamp) {}
+
 #if (BLETEST_THROUGHPUT_TEST == 1)
 extern void bletest_completed_pkt(uint16_t handle);
 #endif
@@ -1373,9 +1375,10 @@ conn_tx_pdu:
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
     
+    uint32_t now = os_cputime_get32(); 
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
-    printf("ble_ll_conn_tx_pdu rc(%d)\n", rc);
     if (!rc) {
+        ble_ll_conn_tx(now);
         /* Log transmit on connection state */
         cur_txlen = ble_hdr->txinfo.pyld_len;
         ble_ll_trace_u32x2(BLE_LL_TRACE_ID_CONN_TX, cur_txlen,

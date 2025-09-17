@@ -3,6 +3,8 @@
         "os_cputime.h": "c",
         "ble_hs_mbuf_priv.h": "c",
         "ble_hs_atomic_priv.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "ble_ll_whitelist.h": "c",
+        "ble_ll_sched.h": "c"
     }
 }
