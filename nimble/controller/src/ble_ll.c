@@ -48,10 +48,13 @@
 #include "ble_ll_hci_priv.h"
 #include "ble_ll_priv.h"
 #include "hal/hal_system.h"
+#include "os/os_cputime.h"
 
 #if MYNEWT_VAL(BLE_LL_DTM)
 #include "ble_ll_dtm_priv.h"
 #endif
+
+__attribute__((weak)) void ble_notify_ll_tx(uint32_t timestamp) {}
 
 /* XXX:
  *
@@ -2013,7 +2016,7 @@ ble_transport_to_ll_cmd_impl(void *buf)
 int
 ble_transport_to_ll_acl_impl(struct os_mbuf *om)
 {
-    printf("HERE\n");
+    ble_notify_ll_tx(os_cputime_get32());
     return ble_ll_hci_acl_rx(om, NULL);
 }
 

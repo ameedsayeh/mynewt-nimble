@@ -55,6 +55,7 @@
 #include <errno.h>
 #include <string.h>
 #include "os/os_mempool.h"
+#include "os/os_cputime.h"
 #include "nimble/ble.h"
 #include "host/ble_gatt.h"
 #include "host/ble_uuid.h"
@@ -92,6 +93,9 @@
 
 /** Procedure stalled due to resource exhaustion. */
 #define BLE_GATTC_PROC_F_STALLED                0x01
+
+
+__attribute__((weak)) void ble_notify_tx(uint32_t timestamp) {}
 
 /** Represents an in-progress GATT procedure. */
 struct ble_gattc_proc {
@@ -4183,6 +4187,8 @@ ble_gatts_notify_custom(uint16_t conn_handle, uint16_t chr_val_handle,
             goto done;
         }
     }
+
+    ble_notify_tx(os_cputime_get32());
 
     rc = ble_att_clt_tx_notify(conn_handle, chr_val_handle, txom);
     txom = NULL;
