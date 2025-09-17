@@ -4188,7 +4188,7 @@ ble_gatts_notify_custom(uint16_t conn_handle, uint16_t chr_val_handle,
         }
     }
 
-    ble_notify_tx(os_cputime_get32());
+    // ble_notify_tx(os_cputime_get32());
 
     rc = ble_att_clt_tx_notify(conn_handle, chr_val_handle, txom);
     txom = NULL;
