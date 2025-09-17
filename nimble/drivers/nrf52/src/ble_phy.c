@@ -1197,11 +1197,14 @@ ble_phy_rx_end_isr(void)
     }
 }
 
+__attribute__((weak)) void ble_ll_conn_rx(uint32_t timestamp) {}
+
 static bool
 ble_phy_rx_start_isr(void)
 {
     // RX TIMESTAMP HERE
-    // ble_rx_phy_ts(os_cputime_get32());
+    uint32_t now = os_cputime_get32();
+    ble_ll_conn_rx(now);
 
     int rc;
     uint32_t state;
