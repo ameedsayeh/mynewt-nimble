@@ -1372,8 +1372,9 @@ conn_tx_pdu:
 
     /* Set transmit end callback */
     ble_phy_set_txend_cb(txend_func, connsm);
-    printf("ble_ll_conn_tx_pdu\n");
+    
     rc = ble_phy_tx(ble_ll_tx_mbuf_pducb, m, end_transition);
+    printf("ble_ll_conn_tx_pdu rc(%d)\n", rc);
     if (!rc) {
         /* Log transmit on connection state */
         cur_txlen = ble_hdr->txinfo.pyld_len;
